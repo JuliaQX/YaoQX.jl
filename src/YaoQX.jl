@@ -1,8 +1,6 @@
 module YaoQX
 
-import YaoAPI:
-    AbstractRegister,
-    apply!
+using YaoAPI
 
 include("register.jl")
 
