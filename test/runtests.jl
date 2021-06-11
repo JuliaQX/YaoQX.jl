@@ -1,6 +1,7 @@
 using YaoQX
 using Test
+using TestSetExtensions
 
-@testset "YaoQX.jl" begin
-    # Write your tests here.
+@testset ExtendedTestSet "YaoQX.jl" begin
+    @includetests ARGS
 end
