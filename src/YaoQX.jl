@@ -1,5 +1,7 @@
 module YaoQX
 
-# Write your package code here.
+using YaoAPI
+
+include("register.jl")
 
 end
