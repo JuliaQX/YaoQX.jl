@@ -17,7 +17,7 @@ YaoQX is not yet registered so to install will need to provide full github path.
 
 The following shows a very simple usage of YaoQX
 
-``
+```
 using YaoQX
 
 # create a YaoBlocks circuit
