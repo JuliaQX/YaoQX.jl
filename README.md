@@ -1,16 +1,11 @@
 # YaoQX
 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://Roger-luo.github.io/YaoQX.jl/stable)
-[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://Roger-luo.github.io/YaoQX.jl/dev)
-[![Build Status](https://github.com/Roger-luo/YaoQX.jl/workflows/CI/badge.svg)](https://github.com/Roger-luo/YaoQX.jl/actions)
-[![Coverage](https://codecov.io/gh/Roger-luo/YaoQX.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/Roger-luo/YaoQX.jl)
-
 ## Installation
 
 YaoQX is not yet registered so to install will need to provide full github path.
 
 ```
-] add https://github.com/JuliaQX/YaoQX.jl
+] add YaoQX
 ```
 
 ## Usage
@@ -36,3 +31,17 @@ register. A measurement is then performed which returns 10 bitstrings and corres
 amplitudes. Note that the bistrings returned are currently not distributed according to
 the output distribution, but instead of just uniformly sampled. This will be addressed in
 future updates when more advanced sampling methods are added to JuliaQX.
+
+YaoQX can also be used to convert `YaoBlocks` circuits to a TensorNetworkCircuit struct that
+can then be used with the [QXTools](https://github.com/JuliaQX/QXTools.jl) framework.
+
+```
+using YaoQX
+using QXTools
+
+# create a YaoBlocks circuit
+circ = ghz(3)
+
+# convert to a TensorNetworkCircuit
+tnc = convert_to_tnc(circ)
+```
