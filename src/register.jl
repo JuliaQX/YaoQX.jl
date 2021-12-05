@@ -105,3 +105,38 @@ function YaoAPI.measure(reg::QXReg; nshots=10)
     sampler = ListSampler(ctx; sampler_params[:params]...)
     sampler()
 end
+
+"""
+    QXTools._convert_to_tnc(block::AbstractBlock; kwargs...)
+
+Convert the given YaoBlocks circuit to a TensorNetworkCircuit
+"""
+function QXTools._convert_to_tnc(block::AbstractBlock; kwargs...)
+    tnc = TensorNetworkCircuit(nqubits(block))
+    for (locs, matrix) in qx_intrinsic_nodes(block)
+        push!(tnc, collect(locs), Matrix(matrix); kwargs...)
+    end
+    return tnc
+end
+
+"""
+    QXTools.convert_to_tnc(circ::AbstractBlock;
+                           input::Union{String, Nothing}=nothing,
+                           output::Union{String, Nothing}=nothing,
+                           no_input::Bool=false,
+                           no_output::Bool=false,
+                           kwargs...)
+
+Function to convert a YaoBlocks circuit to a QXTools tensor network circuit
+"""
+function QXTools.convert_to_tnc(circ::AbstractBlock;
+                        input::Union{String, Nothing}=nothing,
+                        output::Union{String, Nothing}=nothing,
+                        no_input::Bool=false,
+                        no_output::Bool=false,
+                        kwargs...)
+    tnc = QXTools._convert_to_tnc(circ; kwargs...)
+    if !no_input add_input!(tnc, input) end
+    if !no_output add_output!(tnc, output) end
+    tnc
+end
